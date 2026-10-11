@@ -98,9 +98,9 @@ async function loadTotal(){
 try{
 const r=await fetch(URL+"?action=total&service="+encodeURIComponent(SERVICE),{cache:"no-store"});
 const d=await r.json();
-copyBtn.textContent="COPY AND DELETE ("+(d.total??0)+")";
+copyBtn.textContent="COPY & DELETE ("+(d.total??0)+")";
 }catch{
-copyBtn.textContent="COPY AND DELETE (--)";
+copyBtn.textContent="COPY & DELETE (--)";
 }
 }
 
