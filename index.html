@@ -1,1126 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>META AI PANEL</title>
-
 <style>
-
-:root{
-
---bg:#070A13;
---bg2:#0B1530;
-
---border:rgba(255,255,255,.14);
-
---text:#EEF3FF;
---muted:#A7B3D1;
-
---blue1:#4F8CFF;
---blue2:#2563EB;
-
---green1:#22c55e;
---green2:#16a34a;
-
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-
-min-height:100vh;
-
-background:linear-gradient(
-135deg,
-var(--bg),
-var(--bg2)
-);
-
-font-family:sans-serif;
-
-color:var(--text);
-
-display:flex;
-justify-content:center;
-
-padding:10px;
-
+min-height:100vh;padding:10px;display:flex;justify-content:center;
+background:linear-gradient(135deg,#070a13,#0b1530);
+color:#eef3ff;font-family:Arial,sans-serif
 }
-
 .card{
-
-width:100%;
-max-width:520px;
-
-background:rgba(255,255,255,.08);
-
-border-radius:18px;
-
-padding:14px;
-
-box-shadow:0 0 25px #2563eb;
-
+width:100%;max-width:520px;padding:14px;border-radius:18px;
+background:rgba(255,255,255,.08);box-shadow:0 0 25px #2563eb
 }
-
-.top{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-margin-bottom:12px;
-
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.title{font-size:18px;font-weight:900}
+.sub{font-size:11px;color:#a7b3d1;margin-top:4px}
+.badge{border:1px solid #ffffff24;border-radius:30px;padding:5px 10px;font-size:10px}
+.panel{padding:12px;background:#0004;border:1px solid #ffffff24;border-radius:16px}
+.display{
+min-height:80px;padding:15px;margin-bottom:12px;border-radius:13px;
+border:1px solid #ffffff24;background:#080e1d;
+display:flex;justify-content:center;align-items:center;
+text-align:center;overflow-wrap:anywhere;font-size:21px;font-weight:900
 }
-
-.title{
-
-font-size:18px;
-font-weight:900;
-
-}
-
-.sub{
-
-font-size:11px;
-color:var(--muted);
-
-}
-
-.badge{
-
-border:1px solid var(--border);
-
-border-radius:999px;
-
-padding:5px 10px;
-
-font-size:10px;
-
-}
-
-.panel{
-
-background:rgba(0,0,0,.25);
-
-border:1px solid var(--border);
-
-border-radius:16px;
-
-padding:12px;
-
-}
-
-/* PASSWORD */
-
-.passBox{
-
-background:rgba(245,158,11,.15);
-
-border:1px solid rgba(245,158,11,.5);
-
-border-radius:10px;
-
-padding:10px;
-
-text-align:center;
-
-font-size:13px;
-
-font-weight:900;
-
-cursor:pointer;
-
-margin-bottom:12px;
-
-user-select:none;
-
-}
-
-/* ACCOUNT BOX */
-
-.accountBox{
-
-border:1px solid var(--border);
-
-border-radius:14px;
-
-padding:15px;
-
-text-align:center;
-
-margin-bottom:12px;
-
-}
-
-.accountLabel{
-
-font-size:11px;
-
-color:var(--muted);
-
-margin-bottom:8px;
-
-}
-
-.accountValue{
-
-font-size:32px;
-
-font-weight:900;
-
-}
-
-/* COOLDOWN */
-
-.cooldownBox{
-
-border:2px solid #22c55e;
-
-border-radius:14px;
-
-padding:15px;
-
-margin-bottom:12px;
-
-text-align:center;
-
-background:rgba(34,197,94,.08);
-
-}
-
-.cooldownLabel{
-
-font-size:11px;
-
-color:var(--muted);
-
-margin-bottom:6px;
-
-}
-
-.cooldownValue{
-
-font-size:32px;
-
-font-weight:900;
-
-color:#22c55e;
-
-}
-
-/* COUNTER */
-
-.counterBox{
-
-border:1px solid var(--border);
-
-border-radius:12px;
-
-padding:12px;
-
-margin-bottom:12px;
-
-text-align:center;
-
-}
-
-.counterLabel{
-
-font-size:11px;
-
-color:var(--muted);
-
-margin-bottom:5px;
-
-}
-
-.counterValue{
-
-font-size:28px;
-
-font-weight:900;
-
-}
-
-/* BUTTON */
-
-.getBtn{
-
-width:100%;
-
-border:none;
-
-border-radius:14px;
-
-padding:14px;
-
-font-size:15px;
-
-font-weight:900;
-
-cursor:pointer;
-
-color:#fff;
-
-background:linear-gradient(
-135deg,
-var(--blue1),
-var(--blue2)
-);
-
-margin-bottom:12px;
-
-}
-
-.getBtn:disabled{
-
-opacity:.5;
-
-cursor:not-allowed;
-
-}
-
-/* RESULT */
-
-.resultBox{
-
-border:1px solid var(--border);
-
-border-radius:12px;
-
-padding:15px;
-
-background:rgba(255,255,255,.03);
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-gap:10px;
-
-margin-bottom:12px;
-
-min-height:60px;
-
-}
-
-.resultNumber{
-
-font-size:15px;
-
-font-weight:900;
-
-word-break:break-all;
-
-flex:1;
-
-}
-
+.timer{color:#22c55e;font-size:27px}
 .copyBtn{
-
-border:none;
-
-border-radius:8px;
-
-padding:8px 12px;
-
-cursor:pointer;
-
-font-weight:900;
-
-color:#fff;
-
-background:linear-gradient(
-135deg,
-var(--green1),
-var(--green2)
-);
-
+width:100%;padding:14px;border:0;border-radius:13px;
+background:linear-gradient(135deg,#4f8cff,#2563eb);
+color:white;font-size:14px;font-weight:900;cursor:pointer
 }
-
-/* HISTORY */
-
-.historyTitle{
-
-text-align:center;
-
-font-size:14px;
-
-font-weight:900;
-
-margin-bottom:10px;
-
-}
-
-.history{
-
-display:grid;
-
-gap:8px;
-
-}
-
-.hBox{
-
-border:1px solid var(--border);
-
-border-radius:12px;
-
-padding:10px;
-
-background:rgba(255,255,255,.03);
-
-font-weight:900;
-
-}
-
-/* TOAST */
-
+.copyBtn:disabled{opacity:.6;cursor:not-allowed}
 .toast{
-
-position:fixed;
-
-top:12px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-background:rgba(0,0,0,.85);
-
-padding:10px 14px;
-
-border-radius:10px;
-
-opacity:0;
-
-transition:.2s;
-
-z-index:999;
-
-font-weight:900;
-
+position:fixed;top:12px;left:50%;transform:translateX(-50%);
+background:#111827;padding:10px 14px;border-radius:10px;
+opacity:0;transition:.2s;pointer-events:none
 }
-
-.toast.show{
-
-opacity:1;
-
-}
-
+.toast.show{opacity:1}
 </style>
-
 </head>
-
 <body>
 
-<div
-class="toast"
-id="toast">
-</div>
+<div class="toast" id="toast"></div>
 
 <div class="card">
+  <div class="top">
+    <div>
+      <div class="title">META AI PANEL</div>
+      <div class="sub">Created By Tamim</div>
+    </div>
+    <div class="badge">🇧🇩 META AI</div>
+  </div>
 
-<div class="top">
-
-<div>
-
-<div class="title">
-META AI PANEL
-</div>
-
-<div class="sub">
-Created By Tamim
-</div>
-
-</div>
-
-<div class="badge">
-🇧🇩 META AI
-</div>
-
-</div>
-
-<div class="panel">
-
-<div
-class="passBox"
-id="passBox">
-
-🔑 Password: Tamim100
-
-</div>
-
-<div class="accountBox">
-
-<div class="accountLabel">
-
-TOTAL META AI ACCOUNT
-
-</div>
-
-<div
-class="accountValue"
-id="rangeTotal">
-
-0
-
-</div>
-
-</div>
-
-<div
-class="cooldownBox">
-
-<div class="cooldownLabel">
-
-CURRENT COOLDOWN
-
-</div>
-
-<div
-class="cooldownValue"
-id="cooldown">
-
-READY
-
-</div>
-
-</div>
-
-<div
-class="counterBox">
-
-<div class="counterLabel">
-
-TOTAL META AI ACCOUNT  TAKEN
-
-</div>
-
-<div
-class="counterValue"
-id="counter">
-
-0
-
-</div>
-
-</div>
-
-<button
-class="getBtn"
-id="getBtn">
-
-╰┈➤ GET META AI💻✌︎㋡
-
-</button>
-
-<div
-class="resultBox"
-id="resultBox">
-
-<div
-class="resultNumber"
-id="resultNumber">
-
-</div>
-
-<button
-class="copyBtn"
-id="copyBtn"
-style="display:none">
-
-Copy
-
-</button>
-
-</div>
-
-<div
-class="historyTitle">
-
-HISTORY
-
-</div>
-
-<div
-class="history"
-id="history">
-
-</div>
-</div>
+  <div class="panel">
+    <div class="display" id="display">Loading...</div>
+    <button class="copyBtn" id="copyBtn">COPY AND DELETE (0)</button>
+  </div>
 </div>
 
 <script>
+const URL="https://script.google.com/macros/s/AKfycbxs5UnBzGbXDsbX_I027WP7RVdGrKBuKZpYGGPEee3l6lkr670YDne_A-cwdznjFeWMhg/exec";
+const SERVICE="rangeid01";
 
-const URL =
-"https://script.google.com/macros/s/AKfycbxs5UnBzGbXDsbX_I027WP7RVdGrKBuKZpYGGPEee3l6lkr670YDne_A-cwdznjFeWMhg/exec";
+const display=document.getElementById("display");
+const copyBtn=document.getElementById("copyBtn");
+const toast=document.getElementById("toast");
 
-const SERVICE = "rangeid01";
+const NUMBER_KEY="meta_pending_number";
+const LOCK_KEY="meta_next_allowed";
 
-const HISTORY_KEY = "meta_history";
-const COUNT_KEY = "meta_counter";
-const LOCK_KEY = "meta_lock";
-const RESULT_KEY = "meta_result";
-const RESET_KEY = "meta_reset";
+let currentNumber=localStorage.getItem(NUMBER_KEY)||"";
+let nextAllowed=Number(localStorage.getItem(LOCK_KEY)||0);
+let busy=false;
+let timer=null;
+let toastTimer=null;
 
-const toast =
-document.getElementById("toast");
-
-const passBox =
-document.getElementById("passBox");
-
-const rangeTotal =
-document.getElementById("rangeTotal");
-
-const cooldownEl =
-document.getElementById("cooldown");
-
-const counterEl =
-document.getElementById("counter");
-
-const resultBox =
-document.getElementById("resultBox");
-
-const resultNumber =
-document.getElementById("resultNumber");
-
-const copyBtn =
-document.getElementById("copyBtn");
-
-const historyEl =
-document.getElementById("history");
-
-const getBtn =
-document.getElementById("getBtn");
-
-/* TOAST */
-
-function showToast(msg){
-
-toast.textContent = msg;
-
+function notify(msg){
+toast.textContent=msg;
 toast.classList.add("show");
-
-setTimeout(()=>{
-
-toast.classList.remove("show");
-
-},2500);
-
+clearTimeout(toastTimer);
+toastTimer=setTimeout(()=>toast.classList.remove("show"),1800);
 }
 
-/* PASSWORD COPY */
-
-passBox.onclick = async ()=>{
-
-try{
-
-await navigator
-.clipboard
-.writeText(
-"Tamim100"
-);
-
-showToast(
-"Password Copied"
-);
-
-}catch{
-
-showToast(
-"Copy Failed"
-);
-
-}
-
-};
-
-/* HISTORY */
-
-function getHistory(){
-
-return JSON.parse(
-
-localStorage.getItem(
-HISTORY_KEY
-) || "[]"
-
-);
-
-}
-
-function saveHistory(arr){
-
-/* ONLY 2 HISTORY */
-
-localStorage.setItem(
-
-HISTORY_KEY,
-
-JSON.stringify(
-arr.slice(0,2)
-)
-
-);
-
-}
-
-function addHistory(num){
-
-let h =
-getHistory();
-
-h.unshift(num);
-
-saveHistory(h);
-
-renderHistory();
-
-}
-
-function renderHistory(){
-
-const h =
-getHistory();
-
-historyEl.innerHTML =
-"";
-
-if(h.length===0){
-
-historyEl.innerHTML =
-
-`
-
-<div class="hBox">
-
-No History
-
-</div>
-
-`;
-
-return;
-
-}
-
-h.forEach(item=>{
-
-historyEl.innerHTML +=
-
-`
-
-<div class="hBox">
-
-${item}
-
-</div>
-
-`;
-
-});
-
-}
-
-/* COUNTER */
-
-function getCounter(){
-
-return Number(
-
-localStorage.getItem(
-COUNT_KEY
-) || 0
-
-);
-
-}
-
-function setCounter(v){
-
-localStorage.setItem(
-COUNT_KEY,
-v
-);
-
-counterEl.textContent =
-v;
-
-}
-
-/* RESULT */
-
-function saveResult(v){
-
-localStorage.setItem(
-RESULT_KEY,
-v
-);
-
-}
-
-function loadResult(){
-
-const num =
-
-localStorage.getItem(
-RESULT_KEY
-) || "";
-
-if(num){
-
-resultNumber.textContent =
-num;
-
-copyBtn.style.display =
-"block";
-
+function showNumber(){
+if(currentNumber){
+display.textContent=currentNumber;
+copyBtn.disabled=false;
 }else{
-
-resultNumber.textContent =
-"";
-
-copyBtn.style.display =
-"none";
-
+display.textContent="Loading...";
+copyBtn.disabled=true;
 }
-
 }
-
-/* LOCK */
-
-function setLock(ms){
-
-localStorage.setItem(
-
-LOCK_KEY,
-
-Date.now()+ms
-
-);
-
-}
-
-function getLock(){
-
-return Number(
-
-localStorage.getItem(
-LOCK_KEY
-) || 0
-
-);
-
-}
-
-/* COOLDOWN */
-
-function updateCooldown(){
-
-const lockUntil =
-getLock();
-
-const now =
-Date.now();
-
-if(lockUntil<=now){
-
-cooldownEl.textContent =
-"READY";
-
-getBtn.disabled =
-false;
-
-return;
-
-}
-
-const diff =
-lockUntil-now;
-
-const min =
-Math.floor(
-diff/60000
-);
-
-const sec =
-Math.floor(
-(diff%60000)
-/1000
-);
-
-cooldownEl.textContent =
-
-String(min)
-.padStart(2,"0")
-
-+":"
-
-+
-
-String(sec)
-.padStart(2,"0");
-
-getBtn.disabled =
-true;
-
-}
-
-/* DAILY RESET 9 PM */
-
-function checkDailyReset(){
-
-const now =
-new Date();
-
-const today =
-now.toDateString();
-
-const lastReset =
-
-localStorage.getItem(
-RESET_KEY
-) || "";
-
-if(
-now.getHours() >= 21
-){
-
-if(lastReset !== today){
-
-setCounter(0);
-
-localStorage.setItem(
-RESET_KEY,
-today
-);
-
-}
-
-}
-
-}
-
-/* TOTAL META AI */
 
 async function loadTotal(){
-
 try{
-
-const r =
-await fetch(
-
-URL+
-"?action=total&service="+
-SERVICE,
-
-{
-cache:"no-store"
-}
-
-);
-
-const d =
-await r.json();
-
-rangeTotal.textContent =
-
-d.total || 0;
-
-}catch{}
-
-}
-async function getNumber(){
-
-const lockUntil =
-getLock();
-
-if(Date.now() < lockUntil){
-
-showToast(
-"Cooldown Running"
-);
-
-return;
-}
-
-try{
-
-const r =
-await fetch(
-
-URL +
-"?action=get" +
-"&service=" +
-SERVICE +
-"&need=1",
-
-{
-cache:"no-store"
-}
-
-);
-
-const d =
-await r.json();
-
-const numbers =
-d.numbers || [];
-
-if(numbers.length===0){
-
-showToast(
-"No Number Available"
-);
-
-return;
-}
-
-const num =
-numbers[0];
-
-resultNumber.textContent =
-num;
-
-copyBtn.style.display =
-"block";
-
-saveResult(num);
-
-let totalTaken =
-getCounter() + 1;
-
-setCounter(
-totalTaken
-);
-
-/* 10 Numbers = 20 Min Lock */
-
-if(totalTaken >= 10){
-
-setLock(
-10 * 60 * 1000
-);
-
-showToast(
-"10 Minute Lock Started"
-);
-
-}else{
-
-setLock(
-45 * 1000
-);
-
-showToast(
-"Waiting  45 S countdown"
-);
-
-}
-
-updateCooldown();
-
-loadTotal();
-
-}catch(err){
-
-showToast(
-"Server Error"
-);
-
-}
-
-}
-
-/* COPY */
-
-copyBtn.onclick =
-async ()=>{
-
-const num =
-resultNumber.textContent;
-
-if(!num) return;
-
-try{
-
-await navigator
-.clipboard
-.writeText(num);
-
-addHistory(num);
-
-/* CLEAR RESULT */
-
-resultNumber.textContent =
-"";
-
-saveResult("");
-
-/* HIDE COPY BUTTON */
-
-copyBtn.style.display =
-"none";
-
-showToast(
-"Copied"
-);
-
+const r=await fetch(URL+"?action=total&service="+encodeURIComponent(SERVICE),{cache:"no-store"});
+const d=await r.json();
+copyBtn.textContent="COPY AND DELETE ("+(d.total??0)+")";
 }catch{
-
-showToast(
-"Copy Failed"
-);
-
+copyBtn.textContent="COPY AND DELETE (--)";
+}
 }
 
-};
+async function loadNumber(){
+if(busy||currentNumber||Date.now()<nextAllowed)return;
 
-/* BUTTON */
+busy=true;
+copyBtn.disabled=true;
+display.textContent="Loading...";
 
-getBtn.onclick =
-getNumber;
+try{
+const r=await fetch(URL+"?action=get&service="+encodeURIComponent(SERVICE)+"&need=1",{cache:"no-store"});
+const d=await r.json();
+const numbers=d.numbers||[];
 
-/* INITIAL LOAD */
+if(!numbers.length){
+display.textContent="No Number Available";
+return;
+}
 
-loadResult();
+currentNumber=String(numbers[0]);
+localStorage.setItem(NUMBER_KEY,currentNumber);
+showNumber();
 
-renderHistory();
+}catch(e){
+display.textContent="Connection Error";
+copyBtn.disabled=false;
+}finally{
+busy=false;
+}
+}
 
-setCounter(
-getCounter()
-);
+function startTimer(){
+clearInterval(timer);
 
+function tick(){
+const left=Math.max(0,Math.ceil((nextAllowed-Date.now())/1000));
+
+if(left>0){
+display.innerHTML='<span class="timer">00:'+String(left).padStart(2,"0")+'</span>';
+copyBtn.disabled=true;
+}else{
+clearInterval(timer);
+localStorage.removeItem(LOCK_KEY);
+if(!currentNumber)loadNumber();
+}
+}
+
+tick();
+timer=setInterval(tick,250);
+}
+
+copyBtn.addEventListener("click",async()=>{
+if(busy)return;
+
+if(Date.now()<nextAllowed){
+notify("Please wait");
+return;
+}
+
+if(!currentNumber){
+loadNumber();
+return;
+}
+
+busy=true;
+copyBtn.disabled=true;
+
+try{
+await navigator.clipboard.writeText(currentNumber);
+
+// Delete only after successful copy
+currentNumber="";
+localStorage.removeItem(NUMBER_KEY);
+display.textContent="";
+notify("Copied and Deleted");
+
+nextAllowed=Date.now()+10000;
+localStorage.setItem(LOCK_KEY,String(nextAllowed));
+
+startTimer();
 loadTotal();
 
-checkDailyReset();
+}catch(e){
+notify("Copy Failed - Number Kept");
+showNumber();
+}finally{
+busy=false;
+}
+});
 
-updateCooldown();
+// Restore saved number or existing cooldown on every visit
+if(currentNumber){
+showNumber();
+}else if(Date.now()<nextAllowed){
+startTimer();
+}else{
+loadNumber();
+}
 
-/* LIVE UPDATE */
-
-setInterval(()=>{
-
-updateCooldown();
-
-checkDailyReset();
-
-},1000);
-
+loadTotal();
+if(Date.now()<nextAllowed)startTimer();
 </script>
-
 </body>
 </html>
